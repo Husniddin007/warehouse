@@ -9,6 +9,6 @@ router.register(r'warehouses', WarehouseViewSet)
 router.register(r'products-materials', ProductMaterialsViewSet)
 
 urlpatterns = [
-    path('app', include(router.urls)),
+    path('app/', include(router.urls)),
     path('app/get_materials/', GetMaterials.as_view(), name='get_materials'),
 ]

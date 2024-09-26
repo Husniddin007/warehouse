@@ -29,51 +29,48 @@ class WarehouseViewSet(viewsets.ModelViewSet):
 class GetMaterials(APIView):
 
     def post(self, request):
-        products_to_produce = [
-            {'product_name': 'SHim', 'qty': 30},
-            {'product_name': 'Ko`ylak', 'qty': 30}
-        ]
+        products = request.data.get('products', [])
         result = []
 
-        for product_data in products_to_produce:
-            product = Product.objects.get(product_name=product_data['product_name'])
+        for p in products:
+            product = Product.objects.get(product_name=p['product_name'])
             product_materials = ProductMaterials.objects.filter(product=product)
-            materials_needed = []
+            materials = []
 
             for pm in product_materials:
-                total_needed = pm.quantity * product_data['qty']
-                warehouse_batches = Warehouse.objects.filter(material=pm.material).order_by('id')
+                total = pm.quantity * p['qty']
+                warehouse = Warehouse.objects.filter(material=pm.material).order_by('id')
 
-                for batch in warehouse_batches:
-                    if total_needed <= 0:
+                for w in warehouse:
+                    if total <= 0:
                         break
 
-                    if batch.remaining_quantity > total_needed:
-                        materials_needed.append({
-                            'warehouse_id': batch.id,
+                    if w.remaining_quantity > total:
+                        materials.append({
+                            'warehouse_id': w.id,
                             'material_name': pm.material.material_name,
-                            'qty': batch.remaining_quantity,
-                            'price': batch.price
+                            'qty': w.remaining_quantity,
+                            'price': w.price
                         })
                         total_needed = 0
                     else:
-                        materials_needed.append({
-                            'warehouse_id': batch.id,
+                        materials.append({
+                            'warehouse_id': w.id,
                             'material_name': pm.material.material_name,
-                            'qty': batch.remaining_quantity,
-                            'price': batch.price
+                            'qty': w.remaining_quantity,
+                            'price': w.price
                         })
-                        total_needed -= batch.remaining_quantity
-                if total_needed > 0:
-                    materials_needed.append({
+                        total -= w.remaining_quantity
+                if total > 0:
+                    materials.append({
                         'warehouse_id': None,
                         'material_name': pm.material.material_name,
-                        'qty': batch.remaining_quantity,
+                        'qty': total,
                         'price': None
                     })
             result.append({
                 'product_name': product.product_name,
-                'product_qty': product_data['qty'],
-                'product_materials': materials_needed,
+                'product_qty': p['qty'],
+                'product_materials': materials,
             })
         return Response({'result': result})
