@@ -29,11 +29,11 @@ class WarehouseViewSet(viewsets.ModelViewSet):
 class GetMaterials(APIView):
 
     def post(self, request):
-        products = request.data.get('products', [])
+        productss = request.data.get('products', [])
         result = []
 
-        for p in products:
-            product = Product.objects.get(product_name=p['product_name'])
+        for p in productss:
+            product = Product.objects.get(name=p['product_name'])
             product_materials = ProductMaterials.objects.filter(product=product)
             materials = []
 
@@ -45,31 +45,31 @@ class GetMaterials(APIView):
                     if total <= 0:
                         break
 
-                    if w.remaining_quantity > total:
+                    if w.remainider > total:
                         materials.append({
                             'warehouse_id': w.id,
-                            'material_name': pm.material.material_name,
-                            'qty': w.remaining_quantity,
+                            'material_name': pm.material.name,
+                            'qty': w.remainder,
                             'price': w.price
                         })
                         total_needed = 0
                     else:
                         materials.append({
                             'warehouse_id': w.id,
-                            'material_name': pm.material.material_name,
-                            'qty': w.remaining_quantity,
+                            'material_name': pm.material.name,
+                            'qty': w.remainder,
                             'price': w.price
                         })
-                        total -= w.remaining_quantity
+                        total -= w.remainder
                 if total > 0:
                     materials.append({
                         'warehouse_id': None,
-                        'material_name': pm.material.material_name,
+                        'material_name': pm.material.name,
                         'qty': total,
                         'price': None
                     })
             result.append({
-                'product_name': product.product_name,
+                'product_name': product.name,
                 'product_qty': p['qty'],
                 'product_materials': materials,
             })
