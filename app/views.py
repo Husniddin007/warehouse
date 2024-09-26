@@ -29,10 +29,12 @@ class WarehouseViewSet(viewsets.ModelViewSet):
 class GetMaterials(APIView):
 
     def post(self, request):
-        productss = request.data.get('products', [])
+
+        products_ = request.data.get('products', [])
+
         result = []
 
-        for p in productss:
+        for p in products_:
             product = Product.objects.get(name=p['product_name'])
             product_materials = ProductMaterials.objects.filter(product=product)
             materials = []
@@ -45,14 +47,14 @@ class GetMaterials(APIView):
                     if total <= 0:
                         break
 
-                    if w.remainider > total:
+                    if w.remainder > total:
                         materials.append({
                             'warehouse_id': w.id,
                             'material_name': pm.material.name,
                             'qty': w.remainder,
                             'price': w.price
                         })
-                        total_needed = 0
+                        total = 0
                     else:
                         materials.append({
                             'warehouse_id': w.id,

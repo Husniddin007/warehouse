@@ -1,0 +1,112 @@
+{
+    "result": [
+        {
+            "product_name": "Kuylak",
+            "product_qty": 30,
+            "product_materials": [
+                {
+                    "warehouse_id": 1,
+                    "material_name": "Ip",
+                    "qty": 5.0,
+                    "price": 24.0
+                },
+                {
+                    "warehouse_id": null,
+                    "material_name": "Ip",
+                    "qty": 85.0,
+                    "price": null
+                },
+                {
+                    "warehouse_id": 2,
+                    "material_name": "Zamok",
+                    "qty": 5.0,
+                    "price": 54.0
+                },
+                {
+                    "warehouse_id": null,
+                    "material_name": "Zamok",
+                    "qty": 955.0,
+                    "price": null
+                },
+                {
+                    "warehouse_id": 3,
+                    "material_name": "Mato",
+                    "qty": 3.0,
+                    "price": 332.0
+                },
+                {
+                    "warehouse_id": null,
+                    "material_name": "Mato",
+                    "qty": 9717.0,
+                    "price": null
+                },
+                {
+                    "warehouse_id": 4,
+                    "material_name": "Tugma",
+                    "qty": 9.0,
+                    "price": 67.0
+                },
+                {
+                    "warehouse_id": null,
+                    "material_name": "Tugma",
+                    "qty": 2001.0,
+                    "price": null
+                }
+            ]
+        },
+        {
+            "product_name": "Shim",
+            "product_qty": 20,
+            "product_materials": [
+                {
+                    "warehouse_id": 1,
+                    "material_name": "Ip",
+                    "qty": 5.0,
+                    "price": 24.0
+                },
+                {
+                    "warehouse_id": null,
+                    "material_name": "Ip",
+                    "qty": 35.0,
+                    "price": null
+                },
+                {
+                    "warehouse_id": 2,
+                    "material_name": "Zamok",
+                    "qty": 5.0,
+                    "price": 54.0
+                },
+                {
+                    "warehouse_id": null,
+                    "material_name": "Zamok",
+                    "qty": 55.0,
+                    "price": null
+                },
+                {
+                    "warehouse_id": 3,
+                    "material_name": "Mato",
+                    "qty": 3.0,
+                    "price": 332.0
+                },
+                {
+                    "warehouse_id": null,
+                    "material_name": "Mato",
+                    "qty": 1577.0,
+                    "price": null
+                },
+                {
+                    "warehouse_id": 4,
+                    "material_name": "Tugma",
+                    "qty": 9.0,
+                    "price": 67.0
+                },
+                {
+                    "warehouse_id": null,
+                    "material_name": "Tugma",
+                    "qty": 1291.0,
+                    "price": null
+                }
+            ]
+        }
+    ]
+}
